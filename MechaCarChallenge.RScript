@@ -1,0 +1,147 @@
+> setwd("C:/Users/ssing/Desktop/R_Analysis/01_demo")
+> load("C:/Users/ssing/Desktop/R_Analysis/01_demo/.RData")
+> library(dplyr)
+> library(ggplot2)
+> library(tidyr)
+> library(jsonlite)
+> Mecha_R <- read.csv(file="MechaCar_mpg.csv", check.names = F, stringsAsFactors = F)
+> View(Mecha_R)
+
+> lm(`mpg` ~ `vehicle length` + `vehicle weight` + `spoiler angle` + `ground clearence` + `AWD`, data=Mecha_R)
+Error in eval(predvars, data, env) : object 'ground clearence' not found
+> lm(`mpg` ~ `vehicle length` + `vehicle weight` + `spoiler angle` + `ground clearance` + `AWD`, data=Mecha_R)
+
+Call:
+lm(formula = mpg ~ `vehicle length` + `vehicle weight` + `spoiler angle` + 
+    `ground clearance` + AWD, data = Mecha_R)
+
+Coefficients:
+       (Intercept)    `vehicle length`    `vehicle weight`     `spoiler angle`  
+        -1.040e+02           6.267e+00           1.245e-03           6.877e-02  
+`ground clearance`                 AWD  
+         3.546e+00          -3.411e+00  
+
+> reg_mech = lm(`mpg` ~ `vehicle length` + `vehicle weight` + `spoiler angle` + `ground clearance` + `AWD`, data=Mecha_R)
+> summary(reg_mech)
+
+Call:
+lm(formula = mpg ~ `vehicle length` + `vehicle weight` + `spoiler angle` + 
+    `ground clearance` + AWD, data = Mecha_R)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-19.4701  -4.4994  -0.0692   5.4433  18.5849 
+
+Coefficients:
+                     Estimate Std. Error t value Pr(>|t|)    
+(Intercept)        -1.040e+02  1.585e+01  -6.559 5.08e-08 ***
+`vehicle length`    6.267e+00  6.553e-01   9.563 2.60e-12 ***
+`vehicle weight`    1.245e-03  6.890e-04   1.807   0.0776 .  
+`spoiler angle`     6.877e-02  6.653e-02   1.034   0.3069    
+`ground clearance`  3.546e+00  5.412e-01   6.551 5.21e-08 ***
+AWD                -3.411e+00  2.535e+00  -1.346   0.1852    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 8.774 on 44 degrees of freedom
+Multiple R-squared:  0.7149,	Adjusted R-squared:  0.6825 
+F-statistic: 22.07 on 5 and 44 DF,  p-value: 5.35e-11
+
+> sus_coil <- read.csv(file="Suspension_Coil.csv", check.names = F, stringsAsFactors = F)
+
+> View(sus_coil)
+
+> installed.packages("tidyverse")
+     Package LibPath Version Priority Depends Imports LinkingTo
+     Suggests Enhances License License_is_FOSS License_restricts_use
+     OS_type Archs MD5sum NeedsCompilation Built
+> summarise(sus_coil)
+data frame with 0 columns and 1 row
+> coil_stats <- mean(sus_coil$PSI)
+> coil_stats
+[1] 1499.531
+> ?count()
+> count(sus_coil$VehicleID)
+
+> coil_stats <- sus_coil %>% group_by(PSI) %>% summarize(Mean_PSI=mean(PSI),Median_PSI=median(PSI),Variance=var(PSI), St_Dev=sd(PSI))
+`summarise()` ungrouping output (override with `.groups` argument)
+> coil_stats
+# A tibble: 150 x 5
+     PSI Mean_PSI Median_PSI Variance St_Dev
+   <dbl>    <dbl>      <dbl>    <dbl>  <dbl>
+ 1 1463.    1463.      1463.       NA     NA
+ 2 1466.    1466.      1466.       NA     NA
+ 3 1475.    1475.      1475.       NA     NA
+ 4 1480.    1480.      1480.       NA     NA
+ 5 1482.    1482.      1482.       NA     NA
+ 6 1483.    1483.      1483.       NA     NA
+ 7 1486.    1486.      1486.       NA     NA
+ 8 1486.    1486.      1486.       NA     NA
+ 9 1487.    1487.      1487.       NA     NA
+10 1488.    1488.      1488.       NA     NA
+# ... with 140 more rows
+> coil_stats <- sus_coil %>% summarize(Mean_PSI=mean(PSI),Median_PSI=median(PSI),Variance=var(PSI), St_Dev=sd(PSI))
+> coil_stats
+  Mean_PSI Median_PSI Variance   St_Dev
+1 1499.531   1499.747 76.23459 8.731242
+> ?table
+> stats_table <- table(coil_stats)
+> stats_table
+, , Variance = 76.2345928674917, St_Dev = 8.73124234387591
+
+                  Median_PSI
+Mean_PSI           1499.7465323533
+  1499.53102040069               1
+
+> View(demo_table3)
+> View(coil_stats)
+> plt <- ggplot(sus_coil,aes(x=sus_coil$PSI)
++ plt + geom_density()
+Error: unexpected symbol in:
+"plt <- ggplot(sus_coil,aes(x=sus_coil$PSI)
+plt"
+> 
+> plot_coil <- ggplot(sus_coil, aes(x=sus_coil$PSI))
+> plot_coil + geom_density()
+Warning message:
+Use of `sus_coil$PSI` is discouraged. Use `PSI` instead. 
+> sample_coil <- sus_coil %>% sample_n(50) #randomly sample 50 data points
+> sample_coil <- sus_coil %>% sample_n(50)
+> sample_table <- population_table %>% sample_n(30)
+Error in eval(lhs, parent, parent) : object 'population_table' not found
+> sample_table <- sus_coil %>% sample_n(30)
+> sample_plt <- ggplot(sample_table,aes(x=PSI))
+> sample_plt + geom_density()
+> coil_stats <- sus_coil %>% summarize(Count=count.fields(sus_coil),Range=range(sus_coil),Mean_PSI=mean(PSI),Median_PSI=median(PSI),Variance=var(PSI), St_Dev=sd(PSI))
+Error: Problem with `summarise()` input `Count`.
+x 'file' must be a character string or connection
+i Input `Count` is `count.fields(sus_coil)`.
+> coil_stats
+  Total_Rows  Min_PSI  Max_PSI Mean_PSI Median_PSI Variance   St_Dev
+1        150 1463.064 1535.568 1499.531   1499.747 76.23459 8.731242
+> ?t.test()
+> plot_coil + geom_density()
+Warning message:
+Use of `sus_coil$PSI` is discouraged. Use `PSI` instead. 
+> shapiro.test(sus_coil$PSI)
+
+	Shapiro-Wilk normality test
+
+data:  sus_coil$PSI
+W = 0.85286, p-value = 6.011e-11
+
+> View(sus_coil)
+> >t.test(sample_table$PSI,mu=mean(sus_coil$PSI))
+Error: unexpected '>' in ">"
+> t.test(sample_table$PSI,mu=mean(sus_coil$PSI))
+
+	One Sample t-test
+
+data:  sample_table$PSI
+t = -0.4822, df = 29, p-value = 0.6333
+alternative hypothesis: true mean is not equal to 1499.531
+95 percent confidence interval:
+ 1494.936 1502.373
+sample estimates:
+mean of x 
+ 1498.654 
