@@ -19,7 +19,7 @@ the weight capacity of different prototypes.
 This is a technical report which will aim to construct and justify design choices with qualitative and quantitative reasoning.
 
 Here is a snippet of RStudio.
-![snipped](images\snipped_code.jpg)
+![snipped](images/snipped_code.jpg)
 ### Test 1: Multiple Linear Regression
 
 I identified variables of interest by using Multiple Linear Regression analysis on the MechaCar MPG
@@ -49,7 +49,7 @@ which would suggest that the overall slope of our linear model is not zero.
     Yellow: Individual and Combined p-values
     Red: Slopes
     Green: R-squared values
-![values](images\pvalues_slope.jpg)
+![values](images/pvalues_slope.jpg)
 
 
 
