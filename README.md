@@ -1,4 +1,4 @@
-# MechaCar_Prototypes
+# MechaCar Prototypes Using RStudio
 Using R language to gain an understanding of statistics and hypothesis testing to analyze a series of datasets from the automotive industry.
 
 
@@ -84,4 +84,4 @@ The collected data needed for statistical analysis could be collected from top 5
 of MechaCar prototypes that have varying design specifications from vehicle lengths and ground clearance 
 because it was presented clearly that those specifications affect MPG the most. Then we could match
 those specifications with the competitors’ cars and analyze both MPG. Thus, we would be able to crown a winner
-in fuel efficiency.
+in fuel efficiency. Another method could be to call a subset for each manufacturing lot and perform a t-test to see which lot is not meeting the standard.
