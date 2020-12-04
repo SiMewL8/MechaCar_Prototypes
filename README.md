@@ -1,5 +1,5 @@
 # MechaCar Prototypes Using RStudio
-Using R language to gain an understanding of statistics and hypothesis testing to analyze a series of datasets from the automotive industry.
+Using R language to gain an understanding of statistics and hypothesis testing to analyze datasets from the prototype automotive industry with statistics. 
 
 
 ## MechaCar Prototypes:
